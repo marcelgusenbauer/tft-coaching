@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenger TFT Coaching — 1-on-1 Sessions Live on Discord</title>
+  <meta name="description" content="Personalized 1-on-1 Teamfight Tactics coaching with a Challenger-ranked player. Live on Discord with screen share — economy, positioning, and decision-making that actually ranks you up.">
+  <meta name="theme-color" content="#0a0718">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Challenger TFT Coaching">
+  <meta property="og:title" content="Challenger TFT Coaching — 1-on-1 Sessions Live on Discord">
+  <meta property="og:description" content="Personalized 1-on-1 TFT coaching with a Challenger player. Live on Discord with screen share — fix what's actually capping your rank.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 28 9v14L16 30 4 23V9z' fill='%237c5cff'/%3E%3Cpath d='M16 8l6.5 3.75v7.5L16 23l-6.5-3.75v-7.5z' fill='%230a0718'/%3E%3Cpath d='M16 12l3 1.75v3.5L16 19l-3-1.75v-3.5z' fill='%23f2c05e'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="orbs" aria-hidden="true">
+    <span class="orb orb--violet"></span>
+    <span class="orb orb--magenta"></span>
+    <span class="orb orb--blue"></span>
+  </div>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__brand" href="#top" aria-label="Back to top">
+        <svg class="nav__hex" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M12 1.5 21.5 7v10L12 22.5 2.5 17V7L12 1.5z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 7l4.33 2.5v5L12 17l-4.33-2.5v-5L12 7z" fill="currentColor" opacity=".5"/>
+        </svg>
+        <span>TFT&nbsp;<em>Coaching</em></span>
+      </a>
+      <nav class="nav__links" aria-label="Section navigation">
+        <a href="#credentials">Credentials</a>
+        <a href="#offerings">Offerings</a>
+        <a href="#learn">Curriculum</a>
+        <a href="#testimonials">Results</a>
+        <a href="#how">How it works</a>
+      </nav>
+      <a class="btn btn--gold btn--small" href="#contact">Book a session</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="container hero__inner">
+        <p class="eyebrow">1-on-1 Teamfight Tactics coaching</p>
+
+        <div class="rank-badge">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M12 1.5 21.5 7v10L12 22.5 2.5 17V7L12 1.5z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 7l4.33 2.5v5L12 17l-4.33-2.5v-5L12 7z" fill="currentColor" opacity=".55"/>
+          </svg>
+          <span class="rank-badge__label">Peak</span>
+          <span data-config="peakRank">Challenger 1,000+ LP</span>
+        </div>
+
+        <h1 class="hero__title">
+          Climb with a <span class="grad">Challenger</span><br>
+          in your corner.
+        </h1>
+
+        <p class="hero__sub">
+          Personalized one-on-one TFT coaching, live on Discord. We find what's
+          actually capping your rank — then fix it, game by game.
+        </p>
+
+        <div class="hero__cta">
+          <a class="btn btn--gold" href="#contact">Book a session</a>
+          <a class="btn btn--ghost" href="#how">How it works</a>
+        </div>
+
+        <ul class="hero__trust" aria-label="Session details">
+          <li>Live on Discord</li>
+          <li>Screen share &amp; VOD review</li>
+          <li>Replies within 24h</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CREDENTIALS ============ -->
+    <section class="section" id="credentials">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Credentials</p>
+          <h2>Proof over promises.</h2>
+          <p class="lede">Anyone can claim a rank. Mine is public — go check the ladder yourself.</p>
+        </header>
+
+        <div class="stats reveal">
+          <div class="glass stat">
+            <p class="stat__label">Peak rank</p>
+            <p class="stat__value stat__value--gold" data-config="peakRank">Challenger 1,000+ LP</p>
+          </div>
+          <div class="glass stat">
+            <p class="stat__label">Region</p>
+            <p class="stat__value" data-config="region">EUW</p>
+          </div>
+          <div class="glass stat">
+            <p class="stat__label">Seasons played</p>
+            <p class="stat__value" data-config="seasonsPlayed">8</p>
+          </div>
+        </div>
+
+        <div class="proof reveal">
+          <p class="proof__id">Riot ID: <span data-config="riotId">YourName#EUW</span></p>
+          <a class="btn btn--gold btn--small" href="#" data-config-href="profileUrl">
+            See my live ladder profile on MetaTFT
+            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 3h7v7M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OFFERINGS ============ -->
+    <section class="section" id="offerings">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Offerings</p>
+          <h2>Sessions &amp; plans</h2>
+          <p class="lede">One session or a full training arc — every offer runs live on Discord, and bundle plans save you money.</p>
+        </header>
+
+        <div class="offer-group">
+          <h3 class="offer-group__title reveal">Single sessions</h3>
+          <div class="offers">
+            <article class="glass offer reveal">
+              <p class="offer__meta">60 min</p>
+              <h4>1-Hour Session</h4>
+              <p class="offer__desc">VOD review of your recent lobbies over Discord screen share — or live-game coaching, your pick.</p>
+              <p class="offer__price" data-config-price="session1h">Price on request</p>
+              <a class="btn btn--ghost btn--small offer__cta" href="#contact" data-offer="1-Hour Session">Request this session</a>
+            </article>
+
+            <article class="glass offer offer--popular reveal">
+              <p class="offer__tag offer__tag--gold">Most popular</p>
+              <p class="offer__meta">120 min</p>
+              <h4>2-Hour Deep Dive</h4>
+              <p class="offer__desc">VOD review to pin down your biggest leaks, then a live game where I coach your calls in real time — plus a post-game recap.</p>
+              <p class="offer__price" data-config-price="session2h">Price on request</p>
+              <a class="btn btn--ghost btn--small offer__cta" href="#contact" data-offer="2-Hour Deep Dive">Request this session</a>
+            </article>
+
+            <article class="glass offer reveal">
+              <p class="offer__meta">60 min · two players</p>
+              <h4>Double Up Duo</h4>
+              <p class="offer__desc">Bring your Double Up partner — comps, item routing and coordination for two.</p>
+              <p class="offer__price" data-config-price="duoSession">Price on request</p>
+              <a class="btn btn--ghost btn--small offer__cta" href="#contact" data-offer="Double Up Duo">Request this session</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="offer-group">
+          <h3 class="offer-group__title reveal">Training plans</h3>
+          <div class="offers">
+            <article class="glass offer reveal">
+              <p class="offer__tag offer__tag--violet">Save €20</p>
+              <p class="offer__meta">4 sessions</p>
+              <h4>Starter Plan</h4>
+              <p class="offer__desc">Lock in the fundamentals — economy, tempo, stage-by-stage decision-making — with a plan we adjust after every session.</p>
+              <p class="offer__perk">DM me anytime between sessions</p>
+              <p class="offer__price" data-config-price="plan4h">Price on request</p>
+              <a class="btn btn--ghost btn--small offer__cta" href="#contact" data-offer="Starter Plan (4 sessions)">Request this plan</a>
+            </article>
+
+            <article class="glass offer reveal">
+              <p class="offer__tag offer__tag--violet">Save €60</p>
+              <p class="offer__meta">8 sessions</p>
+              <h4>Climb Plan</h4>
+              <p class="offer__desc">A structured multi-week program built around your ladder games — we track your leaks and close them one by one.</p>
+              <p class="offer__perk">DM me anytime between sessions</p>
+              <p class="offer__price" data-config-price="plan8h">Price on request</p>
+              <a class="btn btn--ghost btn--small offer__cta" href="#contact" data-offer="Climb Plan (8 sessions)">Request this plan</a>
+            </article>
+
+            <article class="glass offer reveal">
+              <p class="offer__tag offer__tag--violet">Save €120</p>
+              <p class="offer__meta">12 sessions</p>
+              <h4>Pro Plan</h4>
+              <p class="offer__desc">The full grind to Master+ — a long-term roadmap, priority scheduling, and a coach who knows your game inside out.</p>
+              <p class="offer__perk">DM me anytime between sessions</p>
+              <p class="offer__price" data-config-price="plan12h">Price on request</p>
+              <a class="btn btn--ghost btn--small offer__cta" href="#contact" data-offer="Pro Plan (12 sessions)">Request this plan</a>
+            </article>
+          </div>
+
+          <aside class="glass custom-offer reveal" aria-label="Custom coaching offer">
+            <div class="custom-offer__copy">
+              <h4>Need something else?</h4>
+              <p>Tell me what you have in mind — hours, format, budget. I'll make it work.</p>
+            </div>
+            <div class="custom-offer__actions">
+              <a class="btn btn--ghost btn--small" href="#contact" data-offer="Custom request">Write me your own offer</a>
+              <a class="link-mail" href="#" data-config-mailto="contactEmail" data-mailto-subject="Custom%20coaching%20offer">Or e-mail me your offer directly</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT YOU'LL LEARN ============ -->
+    <section class="section" id="learn">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Curriculum</p>
+          <h2>What you'll learn</h2>
+          <p class="lede">No cookie-cutter lectures. We work on the four levers that decide every lobby.</p>
+        </header>
+
+        <div class="cards">
+          <article class="glass card reveal">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5v9M9.4 9.8c0-1.1 1.1-1.8 2.6-1.8s2.6.7 2.6 1.8c0 2.7-5.2 1.7-5.2 4.4 0 1.1 1.1 1.8 2.6 1.8s2.6-.7 2.6-1.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Economy &amp; Tempo</h3>
+            <p>Master the gold curve — when to greed, when to roll, and when tempo alone wins the lobby.</p>
+          </article>
+
+          <article class="glass card reveal">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>
+            </div>
+            <h3>Scouting &amp; Positioning</h3>
+            <p>Scout every board in seconds and position like you've already seen the fight play out.</p>
+          </article>
+
+          <article class="glass card reveal">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 7h4.5l9 10H21M21 7h-4.5l-2.4 2.67M3 17h4.5l2.4-2.67" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="m18.4 4.6 2.6 2.4-2.6 2.4M18.4 14.6l2.6 2.4-2.6 2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Meta &amp; Comp Flexibility</h3>
+            <p>Play what your shops and items give you — not one forced comp off a tier list.</p>
+          </article>
+
+          <article class="glass card reveal">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 3v5M12 8 6 13M12 8l6 5M6 13v5M18 13v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="3.5" r="1.6" fill="currentColor"/><circle cx="6" cy="19" r="1.6" fill="currentColor"/><circle cx="18" cy="19" r="1.6" fill="currentColor"/></svg>
+            </div>
+            <h3>Stage-by-Stage Decision-Making</h3>
+            <p>Turn chaotic mid-game spots into routine calls with a clear checklist for every stage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Results</p>
+          <h2>Student results</h2>
+          <p class="lede">Ranks are the receipts. Here's where past students started — and where they ended up.</p>
+        </header>
+
+        <!-- Cards are rendered by main.js from SITE_CONFIG.testimonials.
+             While that list is empty, clearly-marked example cards are shown instead. -->
+        <div class="testimonials" id="testimonial-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section" id="how">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Process</p>
+          <h2>How it works</h2>
+          <p class="lede">Three steps between you and your first session.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="glass step reveal">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3>Send a request</h3>
+            <p>Fill out the form below with your rank and your goals. I read every request personally.</p>
+          </li>
+          <li class="glass step reveal">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3>We schedule</h3>
+            <p>I reply within 24 hours via email or Discord and we lock a time — you'll already know the price from the offer you picked.</p>
+          </li>
+          <li class="glass step reveal">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3>We go live</h3>
+            <p>One-on-one on Discord with screen share: live games, review, and a concrete plan to keep climbing.</p>
+          </li>
+        </ol>
+
+        <p class="pricing-note reveal">Every price is listed under <a href="#offerings">Offerings</a> — pick a single session, or save with a training plan.</p>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="eyebrow">Book a session</p>
+          <h2>Tell me where you're stuck.</h2>
+          <p class="lede">The more specific you are about your goals, the better the first session gets.</p>
+        </header>
+
+        <div class="contact-channels reveal">
+          <a class="btn btn--ghost btn--small" href="#" data-config-href="discordInviteUrl">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path fill="currentColor" d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.873-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.293a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.106c.36.699.772 1.363 1.225 1.994a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.029ZM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/>
+            </svg>
+            Reach me on Discord
+          </a>
+        </div>
+
+        <div class="glass contact-panel reveal">
+          <form id="coaching-form">
+            <!-- Web3Forms honeypot — keep hidden -->
+            <label class="hp-field" aria-hidden="true">
+              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+              Leave this unchecked
+            </label>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="f-name">Name</label>
+                <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+              </div>
+              <div class="form-field">
+                <label for="f-email">Email</label>
+                <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="f-rank">Current TFT rank</label>
+              <select id="f-rank" name="rank" required>
+                <option value="" disabled selected>Select your rank</option>
+                <option>Unranked</option>
+                <option>Iron</option>
+                <option>Bronze</option>
+                <option>Silver</option>
+                <option>Gold</option>
+                <option>Platinum</option>
+                <option>Emerald</option>
+                <option>Diamond</option>
+                <option>Master</option>
+                <option>Grandmaster</option>
+                <option>Challenger</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="f-interest">What are you interested in?</label>
+                <select id="f-interest" name="interest" required>
+                  <option>1-Hour Session</option>
+                  <option>2-Hour Deep Dive</option>
+                  <option>Double Up Duo</option>
+                  <option>Starter Plan (4 sessions)</option>
+                  <option>Climb Plan (8 sessions)</option>
+                  <option>Pro Plan (12 sessions)</option>
+                  <option>Custom request</option>
+                  <option selected>Not sure yet</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="f-discord">Discord handle (optional)</label>
+                <input id="f-discord" name="discord" type="text" autocomplete="off" placeholder="yourname">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="f-message">What do you want to work on?</label>
+              <textarea id="f-message" name="message" rows="5" required placeholder="Where are you stuck, and what's your goal for this set? e.g. 'Hardstuck Emerald 2 — I bleed out in stage 4 and never stabilize.'"></textarea>
+            </div>
+
+            <button class="btn btn--gold btn--block" type="submit">Send request</button>
+            <p class="form-hint">Average reply time: under 24 hours.</p>
+            <p class="form-hint">Prefer e-mail? <a class="link-mail" href="#" data-config-mailto="contactEmail" data-mailto-subject="Custom%20coaching%20offer">E-mail me your offer directly</a>.</p>
+          </form>
+
+          <div id="form-success" class="form-success" hidden tabindex="-1">
+            <svg viewBox="0 0 24 24" width="42" height="42" aria-hidden="true">
+              <path d="M12 1.5 21.5 7v10L12 22.5 2.5 17V7L12 1.5z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="m8 12.3 2.8 2.8L16.3 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Request sent — I'll get back to you within 24 hours.</h3>
+            <p>I'll reach out by email — or on Discord, if you left your handle.</p>
+          </div>
+
+          <p id="form-status" class="form-status" aria-live="polite" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__row">
+        <p class="footer__brand">
+          <span data-config="coachName">Coach</span> · Challenger TFT Coaching
+        </p>
+        <p class="footer__meta">
+          Discord: <a class="footer__discord" href="#" data-config-href="discordInviteUrl">@<span data-config="discordHandle">yourname</span></a>
+          <span class="footer__sep" aria-hidden="true">·</span>
+          © 2026
+        </p>
+      </div>
+      <p class="footer__disclaimer">
+        This site is not endorsed by Riot Games and does not reflect the views or opinions of
+        Riot Games or anyone officially involved in producing or managing Riot Games properties.
+        Riot Games and Teamfight Tactics are trademarks or registered trademarks of Riot Games, Inc.
+      </p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
