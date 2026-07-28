@@ -7,7 +7,7 @@ const SITE_CONFIG = {
   profileUrl: "https://www.metatft.com/player/euw/zBerth-EUW", // rank proof
   discordHandle: "kruzlinger",
   discordInviteUrl: "",   // best: your own server invite "https://discord.gg/xxxx" — or profile link "https://discord.com/users/<USER_ID>"
-  contactEmail: "",       // shown on form errors and used for the direct "e-mail me your offer" links
+  contactEmail: "danielmemic1@gmail.com", // shown on form errors and used for the direct "e-mail me your offer" links
   web3formsAccessKey: "", // free key from https://web3forms.com — required for the form
   pricing: {
     // These values are editable — change any of them and the page updates.
