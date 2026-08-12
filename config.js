@@ -2,7 +2,7 @@ const SITE_CONFIG = {
   coachName: "zBerth",    // your name or handle
   riotId: "zBerth#EUW",
   region: "EUW",          // ladder region
-  peakRank: "Challenger 1,000+ LP", // rounded on purpose — update as you climb
+  peakRank: "Challenger 1,000+ LP · #34 EUW", // rounded LP on purpose — update as you climb
   seasonsPlayed: "4",     // ranked sets on record (op.gg: Set 8, 15, 16, 17)
   profileUrl: "https://www.metatft.com/player/euw/zBerth-EUW", // rank proof
   discordHandle: "kruzlinger",
