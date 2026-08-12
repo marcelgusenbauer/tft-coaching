@@ -32,7 +32,8 @@ try {
 const REQUIRED = [
   'coach.name', 'coach.peakRank', 'coach.region', 'coach.seasonsPlayed',
   'contact.email', 'hero.titleStart', 'hero.titleHighlight',
-  'offerings.title', 'curriculum.title', 'how.title', 'contactSection.title'
+  'offerings.title', 'curriculum.title', 'how.title', 'contactSection.title',
+  'meta.pageTitle', 'meta.pageDescription'
 ];
 
 function lookup(obj, dotted) {
@@ -185,9 +186,10 @@ function youtubeId(url) {
   return match ? match[1] : '';
 }
 
+// An unusable video link must not block the whole deploy — skip the section and warn.
 const videoId = youtubeId(cfg.video && cfg.video.url);
 if (cfg.video && String(cfg.video.url || '').trim() && !videoId) {
-  fail('Der Video-Link ist keine erkennbare YouTube-Adresse: "' + cfg.video.url + '"');
+  console.warn('Hinweis: "' + cfg.video.url + '" ist keine erkennbare YouTube-Adresse — die Video-Sektion wird ausgelassen.');
 }
 
 const videoSection = videoId ? [
@@ -206,11 +208,17 @@ const videoSection = videoId ? [
 
 /* ---------- links ---------- */
 
+// Only http(s) links are emitted; anything else (empty, javascript:, typo) makes
+// the link inert and visibly marked instead of shipping a dead-looking button.
 function externalLink(url) {
   const value = String(url || '').trim();
-  return value
-    ? { href: esc(value), attrs: ' target="_blank" rel="noopener noreferrer"' }
-    : { href: '#', attrs: ' class="cfg-missing"' };
+  const safe = /^https?:\/\//i.test(value);
+  if (!safe && value) {
+    console.warn('Hinweis: "' + value + '" ist kein http(s)-Link und wird nicht verlinkt.');
+  }
+  return safe
+    ? { href: esc(value), attrs: ' target="_blank" rel="noopener noreferrer"', extraClass: '' }
+    : { href: '#', attrs: ' aria-disabled="true"', extraClass: ' cfg-missing' };
 }
 
 const profileLink = externalLink(cfg.coach.profileUrl);
@@ -327,8 +335,10 @@ const BLOCKS = {
   'structured-data': structuredData,
   'profile-href': profileLink.href,
   'profile-attrs': profileLink.attrs,
+  'profile-class': profileLink.extraClass,
   'discord-href': discordLink.href,
   'discord-attrs': discordLink.attrs,
+  'discord-class': discordLink.extraClass,
   'mail-href': mailHref,
   'site-url': SITE_URL
 };
@@ -342,18 +352,17 @@ try {
 
 const unresolved = [];
 
-// Triple braces first — they contain a double-brace pattern themselves.
-// {{{key}}} inserts pre-rendered HTML.
-html = html.replace(/\{\{\{([\w.-]+)\}\}\}/g, function (match, key) {
-  if (Object.prototype.hasOwnProperty.call(BLOCKS, key)) return BLOCKS[key];
-  unresolved.push(key);
-  return match;
-});
-
-// {{key}} inserts escaped text.
-html = html.replace(/\{\{([\w.-]+)\}\}/g, function (match, key) {
-  if (Object.prototype.hasOwnProperty.call(REPLACEMENTS, key)) return esc(REPLACEMENTS[key]);
-  unresolved.push(key);
+// One single pass: inserted content is never re-scanned, so braces typed into
+// config.json stay literal instead of being treated as placeholders.
+// {{{key}}} inserts pre-rendered HTML, {{key}} inserts escaped text.
+html = html.replace(/\{\{\{([\w.-]+)\}\}\}|\{\{([\w.-]+)\}\}/g, function (match, blockKey, textKey) {
+  if (blockKey !== undefined) {
+    if (Object.prototype.hasOwnProperty.call(BLOCKS, blockKey)) return BLOCKS[blockKey];
+    unresolved.push(blockKey);
+    return match;
+  }
+  if (Object.prototype.hasOwnProperty.call(REPLACEMENTS, textKey)) return esc(REPLACEMENTS[textKey]);
+  unresolved.push(textKey);
   return match;
 });
 
@@ -386,20 +395,29 @@ fs.writeFileSync(path.join(DIST, 'runtime.js'), runtime);
   else console.warn('Hinweis: ' + file + ' fehlt und wurde übersprungen.');
 });
 
-['logo.png', 'og-image.png'].forEach(function (file) {
-  const from = path.join(ROOT, 'assets', file);
-  if (fs.existsSync(from)) fs.copyFileSync(from, path.join(DIST, 'assets', file));
-});
+// Copy every asset, so images uploaded through the CMS reach the live site too.
+const assetsSrc = path.join(ROOT, 'assets');
+if (fs.existsSync(assetsSrc)) {
+  fs.readdirSync(assetsSrc).forEach(function (file) {
+    const from = path.join(assetsSrc, file);
+    if (fs.statSync(from).isFile()) fs.copyFileSync(from, path.join(DIST, 'assets', file));
+  });
+}
 
-// The admin panel (Sveltia CMS) ships as-is, plus the config the CMS reads.
+// The admin panel (Sveltia CMS) ships as-is. config.json itself is NOT deployed —
+// the CMS reads and writes it through the GitHub API, not over HTTP.
 const adminSrc = path.join(ROOT, 'admin');
 if (fs.existsSync(adminSrc)) {
   fs.mkdirSync(path.join(DIST, 'admin'), { recursive: true });
   fs.readdirSync(adminSrc).forEach(function (file) {
-    fs.copyFileSync(path.join(adminSrc, file), path.join(DIST, 'admin', file));
+    const from = path.join(adminSrc, file);
+    if (fs.statSync(from).isFile()) fs.copyFileSync(from, path.join(DIST, 'admin', file));
   });
+  const cmsConfig = fs.readFileSync(path.join(adminSrc, 'config.yml'), 'utf8');
+  if (cmsConfig.indexOf('REPLACE-WITH-WORKER-URL') !== -1) {
+    console.warn('Hinweis: admin/config.yml enthält noch die Platzhalter-URL für den Login-Worker — /admin ist bis dahin nicht nutzbar.');
+  }
 }
-fs.copyFileSync(path.join(ROOT, 'config.json'), path.join(DIST, 'config.json'));
 
 console.log('Build OK — ' +
   (cfg.offerings.singleSessions.length + cfg.offerings.trainingPlans.length) + ' Angebote, ' +

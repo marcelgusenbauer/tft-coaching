@@ -33,7 +33,12 @@ collections:
               - { name: region, label: Region, widget: string, hint: 'z. B. EUW' }
               - { name: peakRank, label: Peak-Rang, widget: string, hint: 'Steht im Hero-Badge und in der Statistik' }
               - { name: seasonsPlayed, label: Gespielte Seasons, widget: string }
-              - { name: profileUrl, label: Profil-Link (Rang-Beweis), widget: string, required: false, hint: 'MetaTFT / op.gg / lolchess — leer lassen blendet den Link aus' }
+              - name: profileUrl
+                label: Profil-Link (Rang-Beweis)
+                widget: string
+                required: false
+                hint: 'MetaTFT / op.gg / lolchess — muss mit https:// beginnen'
+                pattern: ['^$|^https?://', 'Bitte eine vollständige Adresse mit https:// eintragen.']
 
           - name: contact
             label: 2 · Kontakt
@@ -42,7 +47,12 @@ collections:
             fields:
               - { name: email, label: E-Mail-Adresse, widget: string, hint: 'Empfängt die Anfragen und steht hinter den E-Mail-Links' }
               - { name: discordHandle, label: Discord-Name, widget: string, required: false }
-              - { name: discordInviteUrl, label: Discord-Link, widget: string, required: false, hint: 'Profil- oder Server-Einladungslink' }
+              - name: discordInviteUrl
+                label: Discord-Link
+                widget: string
+                required: false
+                hint: 'Profil- oder Server-Einladungslink — muss mit https:// beginnen'
+                pattern: ['^$|^https?://', 'Bitte eine vollständige Adresse mit https:// eintragen.']
               - { name: web3formsAccessKey, label: Web3Forms-Schlüssel, widget: string, hint: 'Technik des Kontaktformulars — nur ändern, wenn du weißt was du tust!' }
 
           - name: hero
@@ -173,7 +183,12 @@ collections:
             widget: object
             collapsed: true
             fields:
-              - { name: url, label: YouTube-Link, widget: string, required: false, hint: 'Leer lassen = keine Video-Sektion. Jedes YouTube-Format funktioniert.' }
+              - name: url
+                label: YouTube-Link
+                widget: string
+                required: false
+                hint: 'Leer lassen = keine Video-Sektion. Jedes YouTube-Format funktioniert.'
+                pattern: ['^$|youtu\.be/|[?&]v=|/embed/|/shorts/|/live/', 'Bitte einen YouTube-Link einfügen (oder das Feld leer lassen).']
               - { name: eyebrow, label: Kleine Zeile, widget: string, required: false }
               - { name: title, label: Überschrift über dem Video, widget: string, required: false }
 
