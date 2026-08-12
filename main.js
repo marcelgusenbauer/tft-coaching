@@ -328,7 +328,6 @@
     var offerNames = {
       session1h: '1-Hour Session',
       session2h: '2-Hour Deep Dive',
-      duoSession: 'Double Up Duo',
       plan4h: 'Starter Plan (4 sessions)',
       plan8h: 'Climb Plan (8 sessions)',
       plan12h: 'Pro Plan (12 sessions)'

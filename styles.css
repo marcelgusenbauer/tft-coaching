@@ -608,6 +608,10 @@ a {
   gap: clamp(0.9rem, 2vw, 1.4rem);
 }
 
+.offers--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .offer {
   position: relative;
   display: flex;
