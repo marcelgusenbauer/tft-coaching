@@ -370,7 +370,11 @@ const runtime = 'window.SITE_RUNTIME = ' + JSON.stringify({
 
 /* ---------- write dist ---------- */
 
-fs.rmSync(DIST, { recursive: true, force: true });
+// fs.rmSync needs Node 14.14+; keep a fallback so older build images still work.
+if (fs.existsSync(DIST)) {
+  if (typeof fs.rmSync === 'function') fs.rmSync(DIST, { recursive: true, force: true });
+  else fs.rmdirSync(DIST, { recursive: true });
+}
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
 
 fs.writeFileSync(path.join(DIST, 'index.html'), html);
