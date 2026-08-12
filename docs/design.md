@@ -12,7 +12,7 @@ receives it as an email.
 - **Offering (updated 2026-07-11, modeled on coachrogue.com):** two groups —
   - *Single sessions:* 1-Hour Session (VOD review or live game) · 2-Hour Deep Dive (VOD + live game, "Most popular") · Double Up Duo (60 min for two players).
   - *Training plans (bundles with discount tag + "DM me anytime between sessions" perk):* Starter Plan (4 sessions) · Climb Plan (8 sessions) · Pro Plan (12 sessions).
-  - Prices live in `config.js` under `pricing.*` and ship FIXED (user decision 2026-07-11, premium ladder): 1 h €50 · 2 h €90 · Duo €65 · 4er €180 (save €20) · 8er €340 (save €60) · 12er €480 (save €120). Empty value falls back to "Price on request".
+  - Prices live in `config.js` under `pricing.*` and ship FIXED. Ladder lowered 2026-08-01 to a €20/h launch base (user decision): 1 h €20 · 2 h €35 · Duo €25 · 4er €70 (save €10) · 8er €135 (save €25) · 12er €190 (save €50). Empty value falls back to "Price on request".
   - Each offer card CTA preselects the offer in the contact form's "What are you interested in?" select and scrolls to the form.
   - Custom offers: "Custom request" option in the form select + a "Need something else?" strip under the plans + direct mailto link (config `contactEmail`).
 - **Testimonials (added 2026-07-11):** section between curriculum and how-it-works, driven by `config.testimonials[]` (name, rank progression, quote). Ships with clearly-marked sample cards until real ones are configured.

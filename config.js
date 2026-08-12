@@ -12,12 +12,12 @@ const SITE_CONFIG = {
   pricing: {
     // These values are editable — change any of them and the page updates.
     // Leave a value empty ("") to fall back to "Price on request" for that offer.
-    session1h: "€50",   // 1-Hour Session
-    session2h: "€90",   // 2-Hour Deep Dive
-    duoSession: "€65",  // Double Up Duo (60 min, two players)
-    plan4h: "€180",     // Starter Plan — 4 sessions (€20 off the €50/h single rate)
-    plan8h: "€340",     // Climb Plan — 8 sessions (€60 off)
-    plan12h: "€480"     // Pro Plan — 12 sessions (€120 off)
+    session1h: "€20",   // 1-Hour Session
+    session2h: "€35",   // 2-Hour Deep Dive (€5 off two single hours)
+    duoSession: "€25",  // Double Up Duo (60 min, two players)
+    plan4h: "€70",      // Starter Plan — 4 sessions (€10 off the €20/h single rate)
+    plan8h: "€135",     // Climb Plan — 8 sessions (€25 off)
+    plan12h: "€190"     // Pro Plan — 12 sessions (€50 off)
   },
   testimonials: [
     // Real student results — add entries here (with the student's permission).
