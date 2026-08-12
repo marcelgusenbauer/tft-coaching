@@ -6,7 +6,7 @@ const SITE_CONFIG = {
   seasonsPlayed: "",      // e.g. "8"
   profileUrl: "https://www.metatft.com/player/euw/zBerth-EUW", // rank proof
   discordHandle: "kruzlinger",
-  discordInviteUrl: "",   // best: your own server invite "https://discord.gg/xxxx" — or profile link "https://discord.com/users/<USER_ID>"
+  discordInviteUrl: "https://discord.com/users/282600381564059648", // zBerth's profile — opens with a "Send message" option
   contactEmail: "danielmemic1@gmail.com", // shown on form errors and used for the direct "e-mail me your offer" links
   web3formsAccessKey: "2b3105bc-2078-4c52-a019-b4b1d00b2317", // delivers form submissions to danielmemic1@gmail.com
   pricing: {
