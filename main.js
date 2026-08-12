@@ -321,6 +321,53 @@
     img.src = 'assets/logo.png';
   }
 
+  /* ---------- Structured data (SEO) ---------- */
+
+  // Built from SITE_CONFIG so prices in the schema always match the page.
+  function injectStructuredData() {
+    var offerNames = {
+      session1h: '1-Hour Session',
+      session2h: '2-Hour Deep Dive',
+      duoSession: 'Double Up Duo',
+      plan4h: 'Starter Plan (4 sessions)',
+      plan8h: 'Climb Plan (8 sessions)',
+      plan12h: 'Pro Plan (12 sessions)'
+    };
+    var pricing = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.pricing) || {};
+    var offers = [];
+    Object.keys(offerNames).forEach(function (key) {
+      var raw = pricing[key];
+      if (!raw) return;
+      var num = parseFloat(String(raw).replace(/[^\d.,]/g, '').replace(',', '.'));
+      if (!num) return;
+      offers.push({
+        '@type': 'Offer',
+        name: offerNames[key],
+        price: num,
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock'
+      });
+    });
+    var data = {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Challenger TFT Coaching',
+      serviceType: 'Video game coaching (Teamfight Tactics)',
+      url: 'https://tft-coaching.pages.dev/',
+      description: 'Personalized 1-on-1 Teamfight Tactics coaching with a Challenger-ranked player, live on Discord.',
+      provider: {
+        '@type': 'Person',
+        name: (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.coachName) || 'zBerth'
+      },
+      areaServed: 'Europe',
+      offers: offers
+    };
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+
   /* ---------- Init ---------- */
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -334,5 +381,6 @@
     setupReveal();
     setupForm();
     setupLogo();
+    injectStructuredData();
   });
 })();

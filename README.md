@@ -51,17 +51,11 @@ Any static server works, e.g.:
 npx serve .        # then open http://localhost:3000
 ```
 
-## Deploy (Cloudflare Pages, free)
+## Deploy (Cloudflare Pages, auto)
 
-1. Run `make-dist.cmd` — builds a clean `dist/` folder (site files only, no docs/IDE files).
-2. [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** →
-   **Pages** → **Upload assets** → project name e.g. `tft-coaching` → drag the `dist/`
-   folder in → **Deploy**.
-3. Site is live at `https://<projekt>.pages.dev` (free subdomain, SSL included).
-
-Re-deploy after changes: run `make-dist.cmd` again, then in the Pages project
-**Create new deployment** → drag `dist/` in. A custom domain can be attached later
-under the project's **Custom domains** tab.
+The Cloudflare Pages project is connected to this repo — **every push to `main` deploys
+automatically** to https://tft-coaching.pages.dev. Build command: `sh build.sh`, output
+directory `dist`. A custom domain can be attached under the project's **Custom domains** tab.
 
 ## Legal
 
