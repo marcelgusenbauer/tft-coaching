@@ -321,6 +321,41 @@
     img.src = 'assets/logo.png';
   }
 
+  /* ---------- Optional text overrides ---------- */
+
+  // [data-text] elements keep their built-in copy unless the matching
+  // SITE_CONFIG.texts entry is non-empty — no "not configured" hint either way.
+  function applyTexts() {
+    var texts = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.texts) || {};
+    document.querySelectorAll('[data-text]').forEach(function (el) {
+      var val = texts[el.getAttribute('data-text')];
+      if (val && String(val).trim()) el.textContent = String(val).trim();
+    });
+  }
+
+  /* ---------- Video embed ---------- */
+
+  // Accepts youtu.be/watch/embed/shorts URLs or a bare 11-char video id.
+  // The #video section stays hidden until a valid videoUrl is configured.
+  function setupVideo() {
+    var section = document.getElementById('video');
+    var frame = document.getElementById('video-frame');
+    if (!section || !frame) return;
+    var url = String((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.videoUrl) || '').trim();
+    if (!url) return;
+    var match = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/) ||
+      url.match(/^([\w-]{11})$/);
+    if (!match) return;
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + match[1];
+    iframe.title = 'Coaching video';
+    iframe.loading = 'lazy';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    frame.appendChild(iframe);
+    section.hidden = false;
+  }
+
   /* ---------- Structured data (SEO) ---------- */
 
   // Built from SITE_CONFIG so prices in the schema always match the page.
@@ -371,10 +406,12 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     applyConfig();
+    applyTexts();
     applyPricing();
     applyMailto();
     // Render before smooth-scroll/reveal setup so new nodes are wired up too.
     renderTestimonials();
+    setupVideo();
     setupSmoothScroll();
     setupOfferLinks();
     setupReveal();

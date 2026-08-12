@@ -81,7 +81,7 @@
           in your corner.
         </h1>
 
-        <p class="hero__sub">
+        <p class="hero__sub" data-text="heroSubline">
           Personalized one-on-one TFT coaching, live on Discord. We find what's
           actually capping your rank — then fix it, game by game.
         </p>
@@ -274,6 +274,17 @@
     </section>
 
     <!-- ============ HOW IT WORKS ============ -->
+    <!-- ============ VIDEO (appears when videoUrl is set in config.js) ============ -->
+    <section class="section" id="video" hidden>
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Video</p>
+          <h2 data-config="videoTitle">See the coaching in action</h2>
+        </header>
+        <div class="video-frame reveal" id="video-frame"></div>
+      </div>
+    </section>
+
     <section class="section" id="how">
       <div class="container">
         <header class="section__head reveal">
@@ -310,7 +321,7 @@
         <header class="section__head reveal">
           <p class="eyebrow">Book a session</p>
           <h2>Tell me where you're stuck.</h2>
-          <p class="lede">The more specific you are about your goals, the better the first session gets.</p>
+          <p class="lede" data-text="contactIntro">The more specific you are about your goals, the better the first session gets.</p>
         </header>
 
         <div class="contact-channels reveal">
