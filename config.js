@@ -3,7 +3,7 @@ const SITE_CONFIG = {
   riotId: "zBerth#EUW",
   region: "EUW",          // ladder region
   peakRank: "Challenger 1,000+ LP", // rounded on purpose — update as you climb
-  seasonsPlayed: "",      // e.g. "8"
+  seasonsPlayed: "4",     // ranked sets on record (op.gg: Set 8, 15, 16, 17)
   profileUrl: "https://www.metatft.com/player/euw/zBerth-EUW", // rank proof
   discordHandle: "kruzlinger",
   discordInviteUrl: "https://discord.com/users/282600381564059648", // zBerth's profile — opens with a "Send message" option
