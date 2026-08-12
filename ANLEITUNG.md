@@ -1,64 +1,72 @@
-# Anleitung: Website selbst ändern (für Daniel / zBerth)
+# Anleitung: Website selbst bearbeiten (für Daniel / zBerth)
 
-Du kannst Preise, Texte und Testimonials der Website **ohne Programmierkenntnisse** ändern.
-Alles Wichtige steht in **einer Datei**: `config.js`. Jede gespeicherte Änderung ist nach
-**ca. 1 Minute automatisch live** auf https://tft-coaching.pages.dev — du musst nichts
-hochladen oder deployen.
+Du kannst **alle Inhalte** der Website selbst ändern — Texte, Preise, Angebote,
+Bewertungen, Video — ohne Programmierkenntnisse. Dafür gibt es ein Bearbeitungs-Panel
+mit normalen Eingabefeldern.
 
-## So änderst du etwas (Schritt für Schritt)
+## So geht's
 
-1. Öffne https://github.com/marcelgusenbauer/tft-coaching (eingeloggt mit deinem GitHub-Account).
-2. Klicke in der Dateiliste auf **`config.js`**.
-3. Klicke rechts oben auf das **Stift-Symbol ✏️** („Edit this file").
-4. Ändere **nur den Text zwischen den Anführungszeichen** — Beispiele:
-   - Preis ändern: `session1h: "€20",` → `session1h: "€25",`
-   - Rang aktualisieren: `peakRank: "Challenger 1,000+ LP · #34 EUW",` → neuen Wert eintragen
-5. Klicke rechts oben auf den grünen Button **„Commit changes…"** → im Fenster nochmal
-   **„Commit changes"**. Fertig!
-6. Warte ~1 Minute, dann lade die Website neu (Strg+F5). Deine Änderung ist live.
+1. Öffne **https://tft-coaching.pages.dev/admin**
+2. Klicke auf **„Sign in with GitHub"** und melde dich mit deinem GitHub-Konto an.
+   (Beim allerersten Mal fragt GitHub einmal um Erlaubnis — auf *Authorize* klicken.)
+3. Klicke links auf **Website → Alle Inhalte der Website**.
+4. Die Inhalte sind in nummerierte Bereiche gegliedert, in derselben Reihenfolge wie
+   auf der Website:
 
-## ⚠️ Die drei goldenen Regeln
+   | Bereich | Was du dort änderst |
+   |---|---|
+   | 1 · Deine Daten | Name, Riot-ID, Rang, Region, Seasons, Profil-Link |
+   | 2 · Kontakt | E-Mail, Discord, Formular-Schlüssel |
+   | 3 · Startbereich | Große Überschrift, Text, Buttons, Stichpunkte |
+   | 4 · Nachweis-Bereich | Überschriften und Kachel-Beschriftungen |
+   | 5 · Angebote & Preise | Alle Sessions und Pläne — inkl. Preise |
+   | 6 · Was du lernst | Die vier Themen-Karten |
+   | 7 + 8 · Bewertungen | Überschriften und die Schüler-Bewertungen |
+   | 9 · Video | YouTube-Link (optional) |
+   | 10 · So läuft es ab | Die drei Schritte |
+   | 11 · Kontaktformular | Alle Beschriftungen und die Danke-Nachricht |
+   | 12 · Google & Link-Vorschau | Seitentitel und Beschreibung für Google |
 
-1. **Niemals Anführungszeichen `"` oder Kommas `,` löschen** — nur den Text dazwischen ändern.
-2. Zeilen, die mit `//` beginnen, sind nur Erklärungen — sie ändern nichts an der Website.
-3. Wenn etwas schiefgeht: **kein Drama.** Die Website geht nicht kaputt, sie zeigt schlimmstenfalls
-   Platzhalter an. Schreib Marcel — er kann jede Änderung mit einem Klick rückgängig machen.
+5. Ändere, was du willst, und klicke oben rechts auf **Save**.
+6. Nach ca. **1 Minute** ist die Änderung live. Website neu laden (Strg+F5).
 
-## Testimonials eintragen (Schüler-Bewertungen)
+## Typische Aufgaben
 
-In `config.js` findest du den Block `testimonials: [ ... ]`. Trage pro Bewertung eine Zeile
-nach diesem Muster ein (Komma am Ende nicht vergessen, wenn mehrere untereinander stehen):
+**Preis ändern:** Bereich 5 → passendes Angebot aufklappen → Feld *Preis* → z. B. `€25`.
+Der Preis erscheint automatisch auch im Auswahlfeld des Kontaktformulars und bei Google.
 
-```
-testimonials: [
-  { name: "MaxTFT", rank: "Emerald II → Diamond IV", quote: "Nach 3 Sessions endlich raus aus Emerald — die VOD-Reviews haben meine größten Fehler sofort sichtbar gemacht." },
-  { name: "Lea", rank: "Platinum I → Emerald III", quote: "Endlich verstehe ich Econ-Management. Jede Session war das Geld wert." },
-],
-```
+**Bewertung hinzufügen:** Bereich 8 → **Add Bewertung** → Name, Rang-Entwicklung
+(z. B. `Emerald II → Diamond IV`) und Zitat eintragen. Sobald die erste echte Bewertung
+drin ist, verschwinden die Beispielkarten automatisch. Bitte nur mit Einverständnis
+der Schüler.
 
-Wichtig: Frag deine Schüler vorher, ob du sie zitieren darfst. Solange die Liste leer ist,
-zeigt die Website automatisch Beispielkarten (klar als „Example" markiert).
+**Angebot hinzufügen oder löschen:** Bereich 5 → **Add Einzelstunde** bzw.
+**Add Trainingsplan** — oder das Papierkorb-Symbol zum Löschen. Reihenfolge lässt sich
+per Ziehen ändern.
 
-## Video einbinden
+**Video einbinden:** Bereich 9 → YouTube-Link einfügen (jedes Format funktioniert).
+Sofort erscheint eine Video-Sektion. Feld wieder leeren = Sektion verschwindet.
 
-In `config.js` gibt es den Abschnitt `VIDEO`. Füge bei `videoUrl` einfach einen
-YouTube-Link ein — egal welches Format:
+## Was passiert, wenn etwas schiefgeht?
 
-```
-videoUrl: "https://youtu.be/DEIN_VIDEO",
-```
+**Nichts Schlimmes.** Wenn eine Eingabe die Website beschädigen würde, bricht der
+automatische Veröffentlichungsvorgang ab und die **bisherige Website bleibt unverändert
+online**. Außerdem wird jede Änderung gespeichert und kann von Marcel mit einem Klick
+rückgängig gemacht werden.
 
-Sobald ein Link drinsteht, erscheint automatisch eine Video-Sektion auf der Seite
-(Überschrift änderbar über `videoTitle`). Link wieder löschen (`videoUrl: "",`) =
-Sektion verschwindet.
+Zwei Felder solltest du in Ruhe lassen, außer du weißt genau was du tust:
+- **Web3Forms-Schlüssel** (Bereich 2) — steuert das Kontaktformular
+- **Seitentitel/-beschreibung** (Bereich 12) — beeinflusst Google
 
-## Eigene Texte
+## Wichtig für die Sicherheit
 
-Im Abschnitt `TEXTE` kannst du den Satz unter der großen Überschrift (`heroSubline`)
-und den Einleitungstext über dem Kontaktformular (`contactIntro`) durch eigene Sätze
-ersetzen. Feld leer lassen = der eingebaute Text bleibt.
+Aktiviere in deinem GitHub-Konto die **Zwei-Faktor-Anmeldung**:
+GitHub → *Settings* → *Password and authentication* → *Two-factor authentication*.
+Dein GitHub-Zugang ist der Schlüssel zur Website.
 
-## Was du NICHT anfassen solltest
+## Notfall-Weg (falls das Panel mal nicht lädt)
 
-Die anderen Dateien (`index.html`, `styles.css`, `main.js`, …) steuern Design und Technik —
-Änderungen dort bitte über Marcel laufen lassen.
+Du kannst die Inhalte auch direkt bearbeiten:
+https://github.com/marcelgusenbauer/tft-coaching → Datei `config.json` → Stift-Symbol ✏️
+→ Text zwischen den Anführungszeichen ändern → **Commit changes**. Dabei niemals
+Anführungszeichen `"`, Kommas `,` oder Klammern löschen.

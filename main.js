@@ -1,150 +1,14 @@
-/* Variant B — "Hextech Arcane" behaviors:
-   config injection, testimonials, smooth scroll, scroll reveal, Web3Forms contact form. */
+/* Runtime behaviour only — all copy is baked into the HTML by build.js.
+   What is left: scroll behaviour, reveal animations and the Web3Forms submit. */
 (function () {
   'use strict';
 
-  // Signal that JS is running — CSS only hides .reveal elements under html.js,
-  // so content stays visible if this script never executes.
+  // CSS only hides .reveal elements under html.js, so the page stays readable
+  // if this script never runs.
   document.documentElement.classList.add('js');
 
-  var cfg = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG) ? SITE_CONFIG : {};
+  var runtime = window.SITE_RUNTIME || {};
   var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function getConfigValue(key) {
-    var raw = cfg[key];
-    return (typeof raw === 'string') ? raw.trim() : '';
-  }
-
-  function markUnconfigured(el, key) {
-    el.classList.add('cfg-missing');
-    el.title = 'Set ' + key + ' in config.js';
-  }
-
-  /* ---------- data-config / data-config-href injection ---------- */
-
-  function applyConfig() {
-    document.querySelectorAll('[data-config]').forEach(function (el) {
-      var key = el.getAttribute('data-config');
-      var value = getConfigValue(key);
-      if (value) {
-        el.textContent = value;
-      } else {
-        markUnconfigured(el, key);
-      }
-    });
-
-    document.querySelectorAll('[data-config-href]').forEach(function (el) {
-      var key = el.getAttribute('data-config-href');
-      var value = getConfigValue(key);
-      if (value) {
-        el.setAttribute('href', value);
-        el.setAttribute('target', '_blank');
-        el.setAttribute('rel', 'noopener noreferrer');
-      } else {
-        el.setAttribute('href', '#');
-        markUnconfigured(el, key);
-      }
-    });
-  }
-
-  /* ---------- Direct e-mail links (data-config-mailto) ---------- */
-
-  function applyMailto() {
-    document.querySelectorAll('[data-config-mailto]').forEach(function (el) {
-      var key = el.getAttribute('data-config-mailto');
-      var email = getConfigValue(key);
-      if (email) {
-        var subject = el.getAttribute('data-mailto-subject');
-        el.setAttribute('href', 'mailto:' + email + (subject ? '?subject=' + subject : ''));
-      } else {
-        // Keep the link inert — the smooth-scroll handler swallows "#" clicks.
-        el.setAttribute('href', '#');
-        markUnconfigured(el, key);
-      }
-    });
-  }
-
-  /* ---------- Testimonials (SITE_CONFIG.testimonials) ---------- */
-
-  // Shown while SITE_CONFIG.testimonials is empty — obviously placeholder,
-  // never mistakable for a real review of a real person.
-  var SAMPLE_TESTIMONIALS = [
-    {
-      name: 'Sample student',
-      rank: 'Emerald II → Diamond IV',
-      quote: 'Placeholder quote — describe the result a real student got from your coaching.'
-    },
-    {
-      name: 'Sample student',
-      rank: 'Platinum I → Emerald III',
-      quote: 'Placeholder quote — swap this for a real review, with your student’s permission.'
-    },
-    {
-      name: 'Sample student',
-      rank: 'Gold IV → Platinum II',
-      quote: 'Placeholder quote — add real entries to the testimonials list in config.js.'
-    }
-  ];
-
-  function renderTestimonials() {
-    var grid = document.getElementById('testimonial-grid');
-    if (!grid) return;
-
-    var configured = Array.isArray(cfg.testimonials) && cfg.testimonials.length > 0;
-    var items = configured ? cfg.testimonials : SAMPLE_TESTIMONIALS;
-
-    items.forEach(function (item) {
-      if (!item || typeof item !== 'object') return;
-
-      var card = document.createElement('figure');
-      card.className = 'glass testimonial reveal';
-
-      if (!configured) {
-        var tag = document.createElement('p');
-        tag.className = 'offer__tag offer__tag--violet';
-        tag.textContent = 'Example — replace in config.js';
-        card.appendChild(tag);
-      }
-
-      // All user-provided strings go through textContent — never innerHTML.
-      var quote = document.createElement('blockquote');
-      quote.className = 'testimonial__quote';
-      var quoteText = document.createElement('p');
-      quoteText.textContent = '“' + String(item.quote || '') + '”';
-      quote.appendChild(quoteText);
-      card.appendChild(quote);
-
-      var byline = document.createElement('figcaption');
-      byline.className = 'testimonial__byline';
-
-      var name = document.createElement('p');
-      name.className = 'testimonial__name';
-      name.textContent = String(item.name || '');
-      if (!configured) markUnconfigured(name, 'testimonials');
-      byline.appendChild(name);
-
-      var rank = document.createElement('p');
-      rank.className = 'testimonial__rank';
-      rank.textContent = String(item.rank || '');
-      byline.appendChild(rank);
-
-      card.appendChild(byline);
-      grid.appendChild(card);
-    });
-  }
-
-  /* ---------- Offer pricing (data-config-price) ---------- */
-
-  function applyPricing() {
-    var pricing = (cfg.pricing && typeof cfg.pricing === 'object') ? cfg.pricing : {};
-    document.querySelectorAll('[data-config-price]').forEach(function (el) {
-      var key = el.getAttribute('data-config-price');
-      var raw = pricing[key];
-      var value = (typeof raw === 'string') ? raw.trim() : '';
-      // Empty price is a legitimate default, not a missing-config state.
-      el.textContent = value || 'Price on request';
-    });
-  }
 
   /* ---------- Offer CTAs → preselect interest, then scroll to #contact ---------- */
 
@@ -158,8 +22,7 @@
           return option.value === offer;
         });
         if (hasOption) interestSelect.value = offer;
-        // Scrolling itself is handled by the shared smooth-scroll handler
-        // (which already respects prefers-reduced-motion).
+        // Scrolling is handled by the shared smooth-scroll handler.
       });
     });
   }
@@ -171,7 +34,7 @@
       link.addEventListener('click', function (event) {
         var href = link.getAttribute('href');
         if (href === '#') {
-          // Unconfigured proof link — do nothing instead of jumping to top.
+          // Unconfigured link — do nothing instead of jumping to the top.
           event.preventDefault();
           return;
         }
@@ -204,6 +67,23 @@
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     elements.forEach(function (el) { observer.observe(el); });
+
+    // Safety net: if the observer never fired (e.g. it is unavailable in an
+    // embedded/headless context), reveal everything rather than leaving the
+    // page blank below the hero.
+    window.setTimeout(function () {
+      if (document.querySelector('.reveal.in')) return;
+      elements.forEach(function (el) { el.classList.add('in'); });
+    }, 2500);
+  }
+
+  /* ---------- Logo fallback ---------- */
+
+  // Hides the brand image instead of showing a broken-image icon.
+  function setupLogoFallback() {
+    var logo = document.querySelector('.nav__logo');
+    if (!logo) return;
+    logo.addEventListener('error', function () { logo.style.display = 'none'; });
   }
 
   /* ---------- Contact form (Web3Forms) ---------- */
@@ -219,16 +99,13 @@
     function setStatus(kind, message, offerMailto) {
       statusEl.className = 'form-status' + (kind ? ' is-' + kind : '');
       statusEl.textContent = message;
-      if (offerMailto) {
-        var email = getConfigValue('contactEmail');
-        if (email) {
-          statusEl.appendChild(document.createTextNode(' You can also reach me directly at '));
-          var mailLink = document.createElement('a');
-          mailLink.href = 'mailto:' + email;
-          mailLink.textContent = email;
-          statusEl.appendChild(mailLink);
-          statusEl.appendChild(document.createTextNode('.'));
-        }
+      if (offerMailto && runtime.contactEmail) {
+        statusEl.appendChild(document.createTextNode(' You can also reach me directly at '));
+        var mailLink = document.createElement('a');
+        mailLink.href = 'mailto:' + runtime.contactEmail;
+        mailLink.textContent = runtime.contactEmail;
+        statusEl.appendChild(mailLink);
+        statusEl.appendChild(document.createTextNode('.'));
       }
     }
 
@@ -244,9 +121,9 @@
         return;
       }
 
-      var accessKey = getConfigValue('web3formsAccessKey');
+      var accessKey = String(runtime.web3formsAccessKey || '').trim();
       if (!accessKey) {
-        setStatus('warn', "This form isn't connected yet — add your free Web3Forms access key in config.js.");
+        setStatus('warn', "This form isn't connected yet — add the Web3Forms access key in the admin panel.");
         return;
       }
 
@@ -300,123 +177,13 @@
     });
   }
 
-  /* ---------- Brand logo ---------- */
-
-  // Swaps the header hex mark and favicon for assets/logo.png. Gated on
-  // onload so a missing file leaves the built-in SVG mark untouched.
-  function setupLogo() {
-    var img = new Image();
-    img.decoding = 'async';
-    img.alt = '';
-    img.className = 'nav__logo';
-    img.onload = function () {
-      var mark = document.querySelector('.nav__hex');
-      if (mark && mark.parentNode) mark.parentNode.replaceChild(img, mark);
-      var favicon = document.querySelector('link[rel="icon"]');
-      if (favicon) {
-        favicon.type = 'image/png';
-        favicon.href = img.src;
-      }
-    };
-    img.src = 'assets/logo.png';
-  }
-
-  /* ---------- Optional text overrides ---------- */
-
-  // [data-text] elements keep their built-in copy unless the matching
-  // SITE_CONFIG.texts entry is non-empty — no "not configured" hint either way.
-  function applyTexts() {
-    var texts = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.texts) || {};
-    document.querySelectorAll('[data-text]').forEach(function (el) {
-      var val = texts[el.getAttribute('data-text')];
-      if (val && String(val).trim()) el.textContent = String(val).trim();
-    });
-  }
-
-  /* ---------- Video embed ---------- */
-
-  // Accepts youtu.be/watch/embed/shorts URLs or a bare 11-char video id.
-  // The #video section stays hidden until a valid videoUrl is configured.
-  function setupVideo() {
-    var section = document.getElementById('video');
-    var frame = document.getElementById('video-frame');
-    if (!section || !frame) return;
-    var url = String((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.videoUrl) || '').trim();
-    if (!url) return;
-    var match = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/) ||
-      url.match(/^([\w-]{11})$/);
-    if (!match) return;
-    var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + match[1];
-    iframe.title = 'Coaching video';
-    iframe.loading = 'lazy';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    iframe.allowFullscreen = true;
-    frame.appendChild(iframe);
-    section.hidden = false;
-  }
-
-  /* ---------- Structured data (SEO) ---------- */
-
-  // Built from SITE_CONFIG so prices in the schema always match the page.
-  function injectStructuredData() {
-    var offerNames = {
-      session1h: '1-Hour Session',
-      session2h: '2-Hour Deep Dive',
-      plan4h: 'Starter Plan (4 sessions)',
-      plan8h: 'Climb Plan (8 sessions)',
-      plan12h: 'Pro Plan (12 sessions)'
-    };
-    var pricing = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.pricing) || {};
-    var offers = [];
-    Object.keys(offerNames).forEach(function (key) {
-      var raw = pricing[key];
-      if (!raw) return;
-      var num = parseFloat(String(raw).replace(/[^\d.,]/g, '').replace(',', '.'));
-      if (!num) return;
-      offers.push({
-        '@type': 'Offer',
-        name: offerNames[key],
-        price: num,
-        priceCurrency: 'EUR',
-        availability: 'https://schema.org/InStock'
-      });
-    });
-    var data = {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Challenger TFT Coaching',
-      serviceType: 'Video game coaching (Teamfight Tactics)',
-      url: 'https://tft-coaching.pages.dev/',
-      description: 'Personalized 1-on-1 Teamfight Tactics coaching with a Challenger-ranked player, live on Discord.',
-      provider: {
-        '@type': 'Person',
-        name: (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.coachName) || 'zBerth'
-      },
-      areaServed: 'Europe',
-      offers: offers
-    };
-    var script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(data);
-    document.head.appendChild(script);
-  }
-
   /* ---------- Init ---------- */
 
   document.addEventListener('DOMContentLoaded', function () {
-    applyConfig();
-    applyTexts();
-    applyPricing();
-    applyMailto();
-    // Render before smooth-scroll/reveal setup so new nodes are wired up too.
-    renderTestimonials();
-    setupVideo();
     setupSmoothScroll();
     setupOfferLinks();
     setupReveal();
+    setupLogoFallback();
     setupForm();
-    setupLogo();
-    injectStructuredData();
   });
 })();

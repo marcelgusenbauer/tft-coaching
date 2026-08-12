@@ -1,0 +1,183 @@
+{
+  "coach": {
+    "name": "zBerth",
+    "riotId": "zBerth#EUW",
+    "region": "EUW",
+    "peakRank": "Challenger 1,000+ LP · #34 EUW",
+    "seasonsPlayed": "4",
+    "profileUrl": "https://www.metatft.com/player/euw/zBerth-EUW"
+  },
+  "contact": {
+    "discordHandle": "kruzlinger",
+    "discordInviteUrl": "https://discord.com/users/282600381564059648",
+    "email": "danielmemic1@gmail.com",
+    "web3formsAccessKey": "2b3105bc-2078-4c52-a019-b4b1d00b2317"
+  },
+  "meta": {
+    "pageTitle": "Challenger TFT Coaching — 1-on-1 Sessions Live on Discord",
+    "pageDescription": "Personalized 1-on-1 Teamfight Tactics coaching with a Challenger-ranked player. Live on Discord with screen share — economy, positioning, and decision-making that actually ranks you up."
+  },
+  "hero": {
+    "eyebrow": "1-on-1 Teamfight Tactics coaching",
+    "badgeLabel": "Peak",
+    "titleStart": "Climb with a",
+    "titleHighlight": "Challenger",
+    "titleEnd": "in your corner.",
+    "subline": "Personalized one-on-one TFT coaching, live on Discord. We find what's actually capping your rank — then fix it, game by game.",
+    "ctaPrimary": "Book a session",
+    "ctaSecondary": "How it works",
+    "trust1": "Live on Discord",
+    "trust2": "Screen share & VOD review",
+    "trust3": "Replies within 24h"
+  },
+  "credentials": {
+    "eyebrow": "Credentials",
+    "title": "Proof over promises.",
+    "lede": "Anyone can claim a rank. Mine is public — go check the ladder yourself.",
+    "labelPeak": "Peak rank",
+    "labelRegion": "Region",
+    "labelSeasons": "Seasons played",
+    "riotIdLabel": "Riot ID:",
+    "verifyButton": "See my live ladder profile on MetaTFT"
+  },
+  "offerings": {
+    "eyebrow": "Offerings",
+    "title": "Sessions & plans",
+    "lede": "One session or a full training arc — every offer runs live on Discord, and bundle plans save you money.",
+    "singleGroupTitle": "Single sessions",
+    "plansGroupTitle": "Training plans",
+    "singleSessions": [
+      {
+        "title": "1-Hour Session",
+        "meta": "60 min",
+        "description": "VOD review of your recent lobbies over Discord screen share — or live-game coaching, your pick.",
+        "price": "€20",
+        "tag": "",
+        "perk": "",
+        "highlight": false,
+        "buttonLabel": "Request this session"
+      },
+      {
+        "title": "2-Hour Deep Dive",
+        "meta": "120 min",
+        "description": "VOD review to pin down your biggest leaks, then a live game where I coach your calls in real time — plus a post-game recap.",
+        "price": "€35",
+        "tag": "Most popular",
+        "perk": "",
+        "highlight": true,
+        "buttonLabel": "Request this session"
+      }
+    ],
+    "trainingPlans": [
+      {
+        "title": "Starter Plan",
+        "meta": "4 sessions",
+        "description": "Lock in the fundamentals — economy, tempo, stage-by-stage decision-making — with a plan we adjust after every session.",
+        "price": "€70",
+        "tag": "Save €10",
+        "perk": "DM me anytime between sessions",
+        "highlight": false,
+        "buttonLabel": "Request this plan"
+      },
+      {
+        "title": "Climb Plan",
+        "meta": "8 sessions",
+        "description": "A structured multi-week program built around your ladder games — we track your leaks and close them one by one.",
+        "price": "€135",
+        "tag": "Save €25",
+        "perk": "DM me anytime between sessions",
+        "highlight": false,
+        "buttonLabel": "Request this plan"
+      },
+      {
+        "title": "Pro Plan",
+        "meta": "12 sessions",
+        "description": "The full grind to Master+ — a long-term roadmap, priority scheduling, and a coach who knows your game inside out.",
+        "price": "€190",
+        "tag": "Save €50",
+        "perk": "DM me anytime between sessions",
+        "highlight": false,
+        "buttonLabel": "Request this plan"
+      }
+    ],
+    "customTitle": "Need something else?",
+    "customText": "Tell me what you have in mind — hours, format, budget. I'll make it work.",
+    "customButton": "Write me your own offer",
+    "customMailLink": "Or e-mail me your offer directly"
+  },
+  "curriculum": {
+    "eyebrow": "Curriculum",
+    "title": "What you'll learn",
+    "lede": "No cookie-cutter lectures. We work on the four levers that decide every lobby.",
+    "cards": [
+      {
+        "icon": "economy",
+        "title": "Economy & Tempo",
+        "text": "Master the gold curve — when to greed, when to roll, and when tempo alone wins the lobby."
+      },
+      {
+        "icon": "board",
+        "title": "Scouting & Positioning",
+        "text": "Scout every board in seconds and position like you've already seen the fight play out."
+      },
+      {
+        "icon": "flex",
+        "title": "Meta & Comp Flexibility",
+        "text": "Play what your shops and items give you — not one forced comp off a tier list."
+      },
+      {
+        "icon": "decisions",
+        "title": "Stage-by-Stage Decision-Making",
+        "text": "Turn chaotic mid-game spots into routine calls with a clear checklist for every stage."
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "eyebrow": "Results",
+    "title": "Student results",
+    "lede": "Ranks are the receipts. Here's where past students started — and where they ended up."
+  },
+  "testimonials": [],
+  "video": {
+    "url": "",
+    "eyebrow": "Video",
+    "title": "See the coaching in action"
+  },
+  "how": {
+    "eyebrow": "Process",
+    "title": "How it works",
+    "lede": "Three steps between you and your first session.",
+    "steps": [
+      {
+        "title": "Send a request",
+        "text": "Fill out the form below with your rank and your goals. I read every request personally."
+      },
+      {
+        "title": "We schedule",
+        "text": "I reply within 24 hours via email or Discord and we lock a time — you'll already know the price from the offer you picked."
+      },
+      {
+        "title": "We go live",
+        "text": "One-on-one on Discord with screen share: live games, review, and a concrete plan to keep climbing."
+      }
+    ],
+    "note": "Every price is listed under Offerings — pick a single session, or save with a training plan."
+  },
+  "contactSection": {
+    "eyebrow": "Book a session",
+    "title": "Tell me where you're stuck.",
+    "lede": "The more specific you are about your goals, the better the first session gets.",
+    "discordButton": "Reach me on Discord",
+    "labelName": "Name",
+    "labelEmail": "Email",
+    "labelRank": "Current TFT rank",
+    "labelInterest": "Which session fits your goal?",
+    "labelDiscord": "Discord handle (optional)",
+    "labelMessage": "What do you want to work on?",
+    "messagePlaceholder": "Where are you stuck, and what's your goal for this set? e.g. 'Hardstuck Emerald 2 — I bleed out in stage 4 and never stabilize.'",
+    "submitButton": "Send request",
+    "replyHint": "Average reply time: under 24 hours.",
+    "successTitle": "Request sent — I'll get back to you within 24 hours.",
+    "successText": "I'll reach out by email — or on Discord, if you left your handle."
+  }
+}

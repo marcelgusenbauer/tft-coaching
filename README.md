@@ -1,63 +1,58 @@
 # TFT Coaching — One-Pager
 
-Booking/landing page for 1-on-1 Teamfight Tactics coaching (Challenger). Pure static site —
-no build step, no framework. The contact form delivers requests to your inbox via
+Booking/landing page for 1-on-1 Teamfight Tactics coaching (Challenger). Static site,
+generated from a single content file. The contact form delivers requests by email via
 [Web3Forms](https://web3forms.com).
+
+**Live:** https://tft-coaching.pages.dev · **Content editor:** https://tft-coaching.pages.dev/admin
 
 ## Structure
 
 ```
-index.html / styles.css / main.js / config.js   → the site ("Hextech Arcane" design)
-assets/       → logo.png goes here
-docs/
-  design.md   → approved design decisions
+config.json    → ALL content (texts, prices, offers, testimonials, video) — the single source
+index.html     → template; {{placeholders}} are filled by the build
+build.js       → renders dist/ from config.json (Node, no dependencies)
+styles.css     → design
+main.js        → runtime only: smooth scroll, reveals, form submit
+admin/         → Sveltia CMS (self-hosted) — the editing UI for config.json
+legal.html     → Impressum + privacy
+assets/        → logo.png, og-image.png
+docs/          → design decisions
+ANLEITUNG.md   → German guide for the client
 ```
 
-The site is fully self-contained — deploy the project folder as-is.
+## Editing content
 
-## Setup (one file: `config.js`)
+Two ways, both end up as a commit that auto-deploys:
 
-All personal data lives in `config.js`:
+1. **Admin panel** (for the client): `/admin` → sign in with GitHub → form fields → Save.
+2. **Directly:** edit `config.json` in GitHub or locally.
 
-| Key | What it is |
-|---|---|
-| `coachName` | Your name/handle |
-| `riotId` | e.g. `YourName#EUW` |
-| `region` | Ladder region (default `EUW`) |
-| `peakRank` | e.g. `Challenger 1,240 LP` |
-| `seasonsPlayed` | e.g. `8` |
-| `profileUrl` | tactics.tools / lolchess.gg profile (rank proof link) |
-| `discordHandle` | Your Discord username |
-| `discordInviteUrl` | Discord server invite / profile link — enables the Discord buttons |
-| `contactEmail` | Shown as direct-email fallback + custom-offer mailto |
-| `web3formsAccessKey` | **Required for the form** — free key from https://web3forms.com (enter your email there, key arrives by mail) |
-| `pricing.*` | Fixed prices (pre-filled: 1 h €50 · 2 h €90 · Duo €65 · 4× €180 · 8× €340 · 12× €480). Empty value → "Price on request" |
-| `testimonials[]` | `{ name, rank, quote }` entries — until filled, clearly-marked sample cards are shown |
+The build **validates** `config.json`: invalid JSON, empty required fields or an
+unrecognizable video URL abort the build, so Cloudflare keeps the last good deployment
+online instead of publishing a broken page.
 
-Unfilled values render as visibly marked placeholders on the page, and the form shows a
-"not connected yet" notice until the Web3Forms key is set — nothing fails silently.
-
-## Logo
-
-Save your logo as `assets/logo.png`. On load it automatically replaces the header hex mark and
-the favicon; while the file is missing, the built-in SVG mark is shown instead. A square image
-(≥128×128) works best — it is displayed as a circle.
-
-## Local preview
-
-Any static server works, e.g.:
+## Local development
 
 ```bash
-npx serve .        # then open http://localhost:3000
+node build.js && npx serve dist -l 4599
 ```
 
-## Deploy (Cloudflare Pages, auto)
+`dist/` is generated and gitignored — never edit it directly.
 
-The Cloudflare Pages project is connected to this repo — **every push to `main` deploys
-automatically** to https://tft-coaching.pages.dev. Build command: `sh build.sh`, output
-directory `dist`. A custom domain can be attached under the project's **Custom domains** tab.
+## Deploy (Cloudflare Pages)
 
-## Legal
+Connected to this repo: every push to `main` deploys automatically.
+Build command `sh build.sh`, output directory `dist`.
 
-Footer includes the Riot Games non-affiliation disclaimer. If you operate commercially from
-Austria, add an Impressum link in the footer.
+## Admin panel setup (one-time)
+
+The CMS signs in through GitHub, which needs an OAuth proxy:
+
+1. Deploy [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) as a Cloudflare Worker.
+2. Register a GitHub OAuth App whose callback URL is `<worker-url>/callback`.
+3. Put the OAuth client ID/secret into the worker's environment variables, and restrict
+   `ALLOWED_DOMAINS` to `tft-coaching.pages.dev`.
+4. Enter the worker URL as `base_url` in `admin/config.yml`.
+
+Only repository collaborators can save — the CMS acts with the signed-in user's GitHub rights.

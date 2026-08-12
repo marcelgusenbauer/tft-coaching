@@ -1,0 +1,226 @@
+backend:
+  name: github
+  repo: marcelgusenbauer/tft-coaching
+  branch: main
+  # Login-Brücke (Cloudflare Worker). Nach dem Deploy des Workers hier die
+  # Worker-URL eintragen, z. B. https://sveltia-cms-auth.NAME.workers.dev
+  base_url: https://REPLACE-WITH-WORKER-URL.workers.dev
+  commit_messages:
+    update: 'Inhalte aktualisiert ({{collection}})'
+
+publish_mode: simple
+media_folder: assets
+public_folder: /assets
+site_url: https://tft-coaching.pages.dev
+
+collections:
+  - name: site
+    label: Website
+    files:
+      - name: content
+        label: Alle Inhalte der Website
+        file: config.json
+        format: json
+        description: Änderungen sind nach dem Speichern in ca. 1 Minute live.
+        fields:
+          - name: coach
+            label: 1 · Deine Daten
+            widget: object
+            collapsed: true
+            fields:
+              - { name: name, label: Anzeigename, widget: string, hint: 'Wird im Header und Footer angezeigt' }
+              - { name: riotId, label: Riot-ID, widget: string, required: false, hint: 'z. B. zBerth#EUW' }
+              - { name: region, label: Region, widget: string, hint: 'z. B. EUW' }
+              - { name: peakRank, label: Peak-Rang, widget: string, hint: 'Steht im Hero-Badge und in der Statistik' }
+              - { name: seasonsPlayed, label: Gespielte Seasons, widget: string }
+              - { name: profileUrl, label: Profil-Link (Rang-Beweis), widget: string, required: false, hint: 'MetaTFT / op.gg / lolchess — leer lassen blendet den Link aus' }
+
+          - name: contact
+            label: 2 · Kontakt
+            widget: object
+            collapsed: true
+            fields:
+              - { name: email, label: E-Mail-Adresse, widget: string, hint: 'Empfängt die Anfragen und steht hinter den E-Mail-Links' }
+              - { name: discordHandle, label: Discord-Name, widget: string, required: false }
+              - { name: discordInviteUrl, label: Discord-Link, widget: string, required: false, hint: 'Profil- oder Server-Einladungslink' }
+              - { name: web3formsAccessKey, label: Web3Forms-Schlüssel, widget: string, hint: 'Technik des Kontaktformulars — nur ändern, wenn du weißt was du tust!' }
+
+          - name: hero
+            label: 3 · Startbereich (ganz oben)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile über der Überschrift, widget: string }
+              - { name: badgeLabel, label: 'Badge-Text vor dem Rang', widget: string, hint: 'z. B. Peak' }
+              - { name: titleStart, label: 'Überschrift — Teil 1', widget: string }
+              - { name: titleHighlight, label: 'Überschrift — hervorgehobenes Wort', widget: string }
+              - { name: titleEnd, label: 'Überschrift — Teil 2 (zweite Zeile)', widget: string }
+              - { name: subline, label: Text unter der Überschrift, widget: text }
+              - { name: ctaPrimary, label: 'Haupt-Button (auch im Menü oben)', widget: string }
+              - { name: ctaSecondary, label: Zweiter Button, widget: string }
+              - { name: trust1, label: 'Stichpunkt 1', widget: string }
+              - { name: trust2, label: 'Stichpunkt 2', widget: string }
+              - { name: trust3, label: 'Stichpunkt 3', widget: string }
+
+          - name: credentials
+            label: 4 · Nachweis-Bereich
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, widget: string }
+              - { name: title, label: Überschrift, widget: string }
+              - { name: lede, label: Einleitungstext, widget: text }
+              - { name: labelPeak, label: 'Beschriftung Kachel 1', widget: string }
+              - { name: labelRegion, label: 'Beschriftung Kachel 2', widget: string }
+              - { name: labelSeasons, label: 'Beschriftung Kachel 3', widget: string }
+              - { name: riotIdLabel, label: Beschriftung vor der Riot-ID, widget: string }
+              - { name: verifyButton, label: Text des Profil-Buttons, widget: string }
+
+          - name: offerings
+            label: 5 · Angebote & Preise
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, widget: string }
+              - { name: title, label: Überschrift, widget: string }
+              - { name: lede, label: Einleitungstext, widget: text }
+              - { name: singleGroupTitle, label: 'Zwischenüberschrift Einzelstunden', widget: string }
+              - name: singleSessions
+                label: Einzelstunden
+                label_singular: Einzelstunde
+                widget: list
+                summary: '{{fields.title}} — {{fields.price}}'
+                fields:
+                  - { name: title, label: Name des Angebots, widget: string }
+                  - { name: meta, label: Dauer, widget: string, required: false, hint: 'z. B. 60 min' }
+                  - { name: description, label: Beschreibung, widget: text }
+                  - { name: price, label: Preis, widget: string, required: false, hint: 'z. B. €20 — leer zeigt "Price on request"' }
+                  - { name: tag, label: Kleines Etikett, widget: string, required: false, hint: 'z. B. Most popular — leer lassen für kein Etikett' }
+                  - { name: perk, label: Zusatzzeile, widget: string, required: false }
+                  - { name: highlight, label: Hervorheben (goldener Rahmen), widget: boolean, default: false }
+                  - { name: buttonLabel, label: Button-Text, widget: string, default: Request this session }
+              - { name: plansGroupTitle, label: 'Zwischenüberschrift Trainingspläne', widget: string }
+              - name: trainingPlans
+                label: Trainingspläne
+                label_singular: Trainingsplan
+                widget: list
+                summary: '{{fields.title}} — {{fields.price}}'
+                fields:
+                  - { name: title, label: Name des Plans, widget: string }
+                  - { name: meta, label: Umfang, widget: string, required: false, hint: 'z. B. 4 sessions — erscheint auch im Formular-Auswahlfeld' }
+                  - { name: description, label: Beschreibung, widget: text }
+                  - { name: price, label: Preis, widget: string, required: false }
+                  - { name: tag, label: Kleines Etikett, widget: string, required: false, hint: 'z. B. Save €10' }
+                  - { name: perk, label: Zusatzzeile, widget: string, required: false }
+                  - { name: highlight, label: Hervorheben (goldener Rahmen), widget: boolean, default: false }
+                  - { name: buttonLabel, label: Button-Text, widget: string, default: Request this plan }
+              - { name: customTitle, label: 'Eigenes Angebot — Überschrift', widget: string }
+              - { name: customText, label: 'Eigenes Angebot — Text', widget: text }
+              - { name: customButton, label: 'Eigenes Angebot — Button', widget: string }
+              - { name: customMailLink, label: 'Eigenes Angebot — E-Mail-Link', widget: string }
+
+          - name: curriculum
+            label: 6 · Was du lernst
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, widget: string }
+              - { name: title, label: Überschrift, widget: string }
+              - { name: lede, label: Einleitungstext, widget: text }
+              - name: cards
+                label: Themen-Karten
+                label_singular: Karte
+                widget: list
+                summary: '{{fields.title}}'
+                fields:
+                  - name: icon
+                    label: Symbol
+                    widget: select
+                    default: target
+                    options:
+                      - { label: Münze (Economy), value: economy }
+                      - { label: Spielfeld (Positioning), value: board }
+                      - { label: Pfeile (Flexibilität), value: flex }
+                      - { label: Entscheidungsbaum, value: decisions }
+                      - { label: Zielscheibe, value: target }
+                      - { label: Diagramm, value: chart }
+                  - { name: title, label: Titel, widget: string }
+                  - { name: text, label: Text, widget: text }
+
+          - name: testimonialsSection
+            label: 7 · Bewertungen — Überschriften
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, widget: string }
+              - { name: title, label: Überschrift, widget: string }
+              - { name: lede, label: Einleitungstext, widget: text }
+
+          - name: testimonials
+            label: 8 · Bewertungen von Schülern
+            label_singular: Bewertung
+            widget: list
+            required: false
+            summary: '{{fields.name}} — {{fields.rank}}'
+            hint: 'Solange die Liste leer ist, zeigt die Website klar markierte Beispielkarten. Bitte nur mit Einverständnis der Schüler eintragen.'
+            fields:
+              - { name: name, label: Name des Schülers, widget: string }
+              - { name: rank, label: Rang-Entwicklung, widget: string, hint: 'z. B. Emerald II → Diamond IV' }
+              - { name: quote, label: Zitat, widget: text }
+
+          - name: video
+            label: 9 · Video (optional)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: url, label: YouTube-Link, widget: string, required: false, hint: 'Leer lassen = keine Video-Sektion. Jedes YouTube-Format funktioniert.' }
+              - { name: eyebrow, label: Kleine Zeile, widget: string, required: false }
+              - { name: title, label: Überschrift über dem Video, widget: string, required: false }
+
+          - name: how
+            label: 10 · So läuft es ab
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, widget: string }
+              - { name: title, label: Überschrift, widget: string }
+              - { name: lede, label: Einleitungstext, widget: text }
+              - name: steps
+                label: Schritte
+                label_singular: Schritt
+                widget: list
+                summary: '{{fields.title}}'
+                hint: 'Die Nummerierung (01, 02, …) entsteht automatisch.'
+                fields:
+                  - { name: title, label: Titel, widget: string }
+                  - { name: text, label: Text, widget: text }
+              - { name: note, label: Hinweiszeile unter den Schritten, widget: text }
+
+          - name: contactSection
+            label: 11 · Kontaktformular
+            widget: object
+            collapsed: true
+            fields:
+              - { name: eyebrow, label: Kleine Zeile, widget: string }
+              - { name: title, label: Überschrift, widget: string }
+              - { name: lede, label: Einleitungstext, widget: text }
+              - { name: discordButton, label: Text des Discord-Buttons, widget: string }
+              - { name: labelName, label: 'Feldbeschriftung: Name', widget: string }
+              - { name: labelEmail, label: 'Feldbeschriftung: E-Mail', widget: string }
+              - { name: labelRank, label: 'Feldbeschriftung: Rang', widget: string }
+              - { name: labelInterest, label: 'Feldbeschriftung: Angebot', widget: string }
+              - { name: labelDiscord, label: 'Feldbeschriftung: Discord', widget: string }
+              - { name: labelMessage, label: 'Feldbeschriftung: Nachricht', widget: string }
+              - { name: messagePlaceholder, label: Beispieltext im Nachrichtenfeld, widget: text }
+              - { name: submitButton, label: Text des Absende-Buttons, widget: string }
+              - { name: replyHint, label: Hinweis unter dem Button, widget: string }
+              - { name: successTitle, label: 'Danke-Seite — Überschrift', widget: string }
+              - { name: successText, label: 'Danke-Seite — Text', widget: string }
+
+          - name: meta
+            label: 12 · Google & Link-Vorschau
+            widget: object
+            collapsed: true
+            fields:
+              - { name: pageTitle, label: Seitentitel, widget: string, hint: 'Erscheint im Browser-Tab und bei Google' }
+              - { name: pageDescription, label: Seitenbeschreibung, widget: text, hint: 'Der Text unter dem Google-Treffer (ca. 150 Zeichen)' }
